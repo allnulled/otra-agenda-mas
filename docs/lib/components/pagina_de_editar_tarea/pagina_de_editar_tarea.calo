@@ -1,0 +1,72 @@
+asigno window.PaginaDeEditarTarea como un componente vue2 con nombre "PaginaDeEditarTarea" con plantilla {
+  <div class="PaginaDeEditarTarea Component">
+    <div v-if="is_loaded">
+      <xformfield :initial-value="name" :on-change="v => name = v">Nombre de tarea:</xformfield>
+      <xformdate style="width:100%;" :initial-value="day" :on-change="v => day = v">Día de tarea:</xformdate>
+      <xformtime style="width:100%;" :initial-value="hour" :on-change="v => hour = v">Hora de tarea:</xformtime>
+      <xformtextarea :initial-value="description" :on-change="v => description = v">Descripción de tarea:</xformtextarea>
+      <hr />
+      <button class="boton_verde" style="width:100%;" v-on:click="update_task">Guardar</button>
+    </div>
+    <div v-else="">
+      <xprogressbar />
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {}.
+    método data donde {
+      retorno {
+        is_loaded: false,
+        name: "",
+        day: "",
+        hour: "",
+        description: ""
+      }.
+    }.
+    propiedad methods como {
+      método asíncrono update_task donde {
+        si this.name.length es igual que 0 lanzo un nuevo Error("El nombre de la tarea no puede estar vacío.").
+        creo id como parseInt(this.$route.params.task_id).
+        hago asíncronamente Vue.prototype.$db.update("task", id, {
+          name: this.name,
+          day: this.day,
+          hour: this.hour,
+          description: this.description
+        }).
+        hago asíncronamente Vue.prototype.$dialogs.inform("La tarea fue actualizada correctamente.").
+        hago this.$router.history.push("/calendar").
+      } en errores hago Vue.prototype.$dialogs.error(error).
+    }.
+    propiedad watch como {}.
+    propiedad computed como {}.
+    método beforeCreate donde {}.
+    método created donde {}.
+    método beforeMount donde {}.
+    método asíncrono mounted donde {
+      hago Vue.prototype.$TopBar.set_title("Editar tarea").
+      si this.$route.params.task_id no es tipo texto {
+        lanzo un nuevo Error("No hay tarea por editar").
+      }.
+      creo tareas_coincidentes como asíncronamente Vue.prototype.$db.select("task", una lambda con (task) donde {
+        retorno task.id es igual que parseInt(this.$route.params.task_id).
+      }).
+      imprimo tareas_coincidentes.
+      si tareas_coincidentes.length no es igual que 1 {
+        lanzo un nuevo Error("No se encontraron tareas con el identificador proporcionado").
+      }.
+      creo task como tareas_coincidentes[0].
+      asigno this.name como task.name.
+      asigno this.day como task.day.
+      asigno this.hour como task.hour.
+      asigno this.description como task.description.
+      asigno this.is_loaded como true.
+    } en errores hago Vue.prototype.$dialogs.error(error).
+    método beforeUpdate donde {}.
+    método updated donde {}.
+    método beforeUnmount donde {}.
+    método unmounted donde {}.
+    método activated donde {}.
+    método deactivated donde {}.
+  }.
+}.

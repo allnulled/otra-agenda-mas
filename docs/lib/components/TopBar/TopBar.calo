@@ -1,0 +1,49 @@
+asigno window.TopBar como un componente vue2 con nombre "TopBar" con plantilla {
+  <div class="TopBar Component">
+    <xlayouthorizontal>
+      <xlayouthorizontalitem>
+        <div class="navigation-button" v-on:click="toggle_navigation">
+          <img class="navigation-icon" src="lib/icons/navigation-white.png" />
+        </div>
+      </xlayouthorizontalitem>
+      <xlayouthorizontalitem style="width:100%; vertical-align: middle; text-align: center;">
+        {{ title }}
+      </xlayouthorizontalitem>
+    </xlayouthorizontal>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {}.
+    método data donde {
+      retorno {
+        title: "Título de página actual"
+      }.
+    }.
+    propiedad methods como {
+      método toggle_navigation donde {
+        creo toggled_elements como document.querySelectorAll(".NavigationBar,.NavigationBackground").
+        desde 0 hasta toggled_elements.length {
+          creo toggled_element como toggled_elements[index].
+          hago toggled_element.classList.toggle("active").
+        }.
+      }.
+      método set_title con (title) donde {
+        asigno this.title como title.
+      }.
+    }.
+    propiedad watch como {}.
+    propiedad computed como {}.
+    método beforeCreate donde {}.
+    método created donde {}.
+    método beforeMount donde {}.
+    método mounted donde {
+      asigno Vue.prototype.$TopBar como this.
+    }.
+    método beforeUpdate donde {}.
+    método updated donde {}.
+    método beforeUnmount donde {}.
+    método unmounted donde {}.
+    método activated donde {}.
+    método deactivated donde {}.
+  }.
+}.

@@ -1,0 +1,27 @@
+.TopBar {
+    height: $theme_fixed_bars_height;
+    background-color: $theme_color_1;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 4px black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+}
+.TopBar .navigation-button {
+    height: $theme_fixed_bars_height;
+    width: $theme_fixed_bars_height;
+    border-right: 1px solid white;
+    cursor: pointer;
+}
+.TopBar .navigation-button:hover {
+    background-color: $theme_color_2;
+}
+.TopBar .navigation-icon {
+    margin-top: 10px;
+    margin-left: 10px;
+    height: 20px;
+    width: auto;
+}

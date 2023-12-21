@@ -1,0 +1,60 @@
+asigno window.PaginaDeCrearTarea como un componente vue2 con nombre "PaginaDeCrearTarea" con plantilla {
+  <div class="PaginaDeCrearTarea Component">
+    <div v-if="is_loaded">
+      <xformfield :initial-value="name" :on-change="v => name = v">Nombre de tarea:</xformfield>
+      <xformdate style="width:100%;" :initial-value="day" :on-change="v => day = v">Día de tarea:</xformdate>
+      <xformtime style="width:100%;" :initial-value="hour" :on-change="v => hour = v">Hora de tarea:</xformtime>
+      <xformtextarea :initial-value="description" :on-change="v => description = v">Descripción de tarea:</xformtextarea>
+      <hr />
+      <button class="boton_verde" style="width:100%;" v-on:click="insert_task">Crear tarea</button>
+    </div>
+    <div v-else="">
+      <xprogressbar />
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {}.
+    método data donde {
+      retorno {
+        is_loaded: false,
+        name: "",
+        day: "",
+        hour: "",
+        description: ""
+      }.
+    }.
+    propiedad methods como {
+      método asíncrono insert_task donde {
+        si this.name.length es igual que 0 lanzo un nuevo Error("El nombre de la tarea no puede estar vacío.").
+        hago asíncronamente Vue.prototype.$db.insert("task", {
+          name: this.name,
+          day: this.day,
+          hour: this.hour,
+          description: this.description
+        }).
+        hago asíncronamente Vue.prototype.$dialogs.inform("La tarea fue insertada correctamente.").
+        hago this.$router.history.push("/calendar").
+      } en errores hago Vue.prototype.$dialogs.error(error).
+    }.
+    propiedad watch como {}.
+    propiedad computed como {}.
+    método beforeCreate donde {}.
+    método created donde {}.
+    método beforeMount donde {}.
+    método mounted donde {
+      hago Vue.prototype.$TopBar.set_title("Crear tarea").
+      si this.$route.query.date {
+        creo date como un nuevo Date(this.$route.query.date).
+        asigno this.day como this.$route.query.date.
+      }.
+      asigno this.is_loaded como true.
+    }.
+    método beforeUpdate donde {}.
+    método updated donde {}.
+    método beforeUnmount donde {}.
+    método unmounted donde {}.
+    método activated donde {}.
+    método deactivated donde {}.
+  }.
+}.

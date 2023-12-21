@@ -1,0 +1,114 @@
+Ejecutable como documento HTML5
+    con autor allnulled
+    con nombre index
+    con versión 1
+<head>
+    <title>MyAgenda</title>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/lib/icons/book.jpg" />
+    <link rel="stylesheet" type="text/css" href="lib/win7/win7.scoped.2.css" />
+    <link rel="stylesheet" type="text/css" href="lib/xcomponents/xcomponents.css" />
+    <link rel="stylesheet" type="text/css" href="lib/components/common/styles/all.css" />
+    <script src="lib/calo/calo.js"></script>
+    <script src="lib/xcomponents/xcomponents.js"></script>
+    <script src="lib/components/TopBar/TopBar.js"></script>
+    <script src="lib/components/TopBarSpace/TopBarSpace.js"></script>
+    <script src="lib/components/BottomBar/BottomBar.js"></script>
+    <script src="lib/components/NavigationBar/NavigationBar.js"></script>
+    <script src="lib/components/NavigationBackground/NavigationBackground.js"></script>
+    <script src="lib/components/calendario_principal/calendario_principal.js"></script>
+    <script src="lib/components/pagina_de_inicio/pagina_de_inicio.js"></script>
+    <script src="lib/components/pagina_de_calendario/pagina_de_calendario.js"></script>
+    <script src="lib/components/pagina_de_tareas/pagina_de_tareas.js"></script>
+    <script src="lib/components/pagina_de_crear_tarea/pagina_de_crear_tarea.js"></script>
+    <script src="lib/components/pagina_de_editar_tarea/pagina_de_editar_tarea.js"></script>
+    <style>
+      * {
+        font-family: Arial;
+      }
+    </style>
+</head>
+<body><div id="app"></div></body>.
+
+creo main como una función asíncrona donde {
+  creo load_database como una función asíncrona donde {
+    ### hago asíncronamente RanasDB.dropDatabaseIfExists("Otra_agenda_mas_data").
+    asigno Vue.prototype.$db como asíncronamente RanasDB.connect("Otra_agenda_mas_data", [[{
+      task: "++id,name,description,tags,date,time"
+    }, una función]]).
+  }.
+  hago asíncronamente load_database().
+  asigno window.App como una aplicación vue2 con nombre "App" con rutas [{
+    propiedad path como "/tasks".
+    propiedad name como "PaginaDeTareas".
+    propiedad component como PaginaDeTareas.
+    propiedad props como {}.
+  }, {
+    propiedad path como "/calendar".
+    propiedad name como "PaginaDeCalendario".
+    propiedad component como PaginaDeCalendario.
+    propiedad props como {}.
+  }, {
+    propiedad path como "/create-task".
+    propiedad name como "PaginaDeCrearTarea".
+    propiedad component como PaginaDeCrearTarea.
+    propiedad props como {}.
+  }, {
+    propiedad path como "/edit-task/:task_id".
+    propiedad name como "PaginaDeEditarTarea".
+    propiedad component como PaginaDeEditarTarea.
+    propiedad props como {}.
+  }, {
+    propiedad path como "/".
+    propiedad name como "PaginaDeInicio".
+    propiedad component como PaginaDeInicio.
+    propiedad props como {}.
+  }] con traducciones {
+      propiedad es como {}.
+      propiedad en como {}.
+      propiedad ca como {}.
+  } con plantilla {
+    <div class="App Component Castelog-app win7">
+      <NavigationBackground />
+      <TopBar />
+      <TopBarSpace />
+      <NavigationBar />
+      <div>
+        <router-view :root="this"></router-view>
+      </div>
+      <BottomBar />
+      <xdialogport />
+    </div>
+  } con estilos {
+      html {}
+      body {}
+      .Component {}
+      .App {}
+  } con lógica {
+    retorno {
+      método data donde {
+        retorno {}.
+      }.
+      propiedad methods como {}.
+      propiedad watch como {}.
+      propiedad computed como {}.
+      método asíncrono beforeCreate donde {
+        asigno this.$window como window.
+      }.
+      método created donde {}.
+      método asíncrono beforeMount donde {
+        
+      }.
+      método mounted donde {}.
+      método beforeUpdate donde {}.
+      método updated donde {}.
+      método beforeUnmount donde {}.
+      método unmounted donde {}.
+      método activated donde {}.
+      método deactivated donde {}.
+    }.
+  } montada en "#app".
+}.
+
+hago main().

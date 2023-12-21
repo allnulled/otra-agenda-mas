@@ -1,0 +1,81 @@
+.boton_verde {
+    background: #69be69 !important;
+    color: white !important;
+    font-weight: bold !important;
+    font-family: Arial;
+    min-height: 40px;
+    height: 40px;
+    border-radius: 0pt !important;
+    border: none !important;
+}
+.boton_verde:hover {
+    background: #4ba04b !important;
+}
+.boton_rojo {
+    background: #be6969 !important;
+    color: white !important;
+    font-weight: bold !important;
+    font-family: Arial;
+    min-height: 40px;
+    height: 40px;
+    border-radius: 0pt !important;
+    border: none !important;
+}
+.boton_rojo:hover {
+    background: #a04b4b !important;
+}
+.boton_amarillo {
+    background: #bebe69 !important;
+    color: white !important;
+    font-weight: bold !important;
+    font-family: Arial;
+    min-height: 40px;
+    height: 40px;
+    border-radius: 0pt !important;
+    border: none !important;
+}
+.boton_amarillo:hover {
+    background: #a0a04b !important;
+}
+.boton_de_tarea {
+    outline-style: none !important;
+}
+
+.tiempo_de_tarea {
+    white-space: nowrap;
+    background-color: #222;
+    padding: 12px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 4px black;
+}
+.nombre_de_tarea {
+    width: 100%;
+    white-space: nowrap;
+    background-color: $theme_color_1;
+    padding: 12px;
+    color: white;
+    box-shadow: 0 0 4px black;
+}
+.descripcion_de_tarea {
+    width: 100%;
+    white-space: nowrap;
+    background: #bebe69 !important;
+    padding: 12px;
+    color: black;
+    box-shadow: 0 0 4px black;
+}
+.icono_de_boton {
+    height: 20px;
+    width: auto;
+}
+.lista_de_tareas {
+
+}
+.item_de_lista_de_tareas {
+    display: table-row;
+}
+.celda_de_tarea {
+    vertical-align: middle;
+    padding: 2px;
+}

@@ -1,0 +1,120 @@
+asigno window.PaginaDeCalendario como un componente vue2 con nombre "PaginaDeCalendario" con plantilla {
+  <div class="PaginaDeCalendario Component">
+    <div style="text-align: center;">
+      <div style="display: inline-block; max-width: 565px; width: 100%;">
+        <CalendarioPrincipal mode="date" :on-change="v => selected_date = v" />
+      </div>
+    </div>
+    <div>
+      <div class="task_list">
+        <div>
+          <table class="lista_de_tareas">
+            <tbody v-for="task, task_index in current_day_tasks" v-bind:key="'task-' + task_index">
+              <tr class="item_de_lista_de_tareas">
+                <td class="celda_de_tarea">
+                  <div class="tiempo_de_tarea">{{ get_only_hour_and_minute(task.hour) }}</div>
+                </td>
+                <td class="celda_de_tarea" style="width: 100%;">
+                  <div class="nombre_de_tarea">{{ task.name }}</div>
+                </td>
+                <td class="celda_de_tarea">
+                  <button class="boton_de_tarea boton_amarillo" style="padding: 4px; min-width:auto;" v-on:click="() => toggle_task(task.id)">
+                    <img class="icono_de_boton" src="lib/icons/eye-black.png" />
+                  </button>
+                </td>
+                <td class="celda_de_tarea">
+                  <button class="boton_de_tarea boton_verde" style="padding: 4px; min-width:auto;" v-on:click="() => go_to_edit_task(task.id)">
+                    <img class="icono_de_boton" src="lib/icons/pencil-black.png" />
+                  </button>
+                </td>
+                <td class="celda_de_tarea">
+                  <button class="boton_de_tarea boton_rojo" style="padding: 4px; min-width:auto;" v-on:click="() => delete_task(task.id, task.name)">
+                    <img class="icono_de_boton" src="lib/icons/trash-black.png" />
+                  </button>
+                </td>
+              </tr>
+              <tr v-if="selected_tasks.indexOf(task.id) !== -1">
+                <td colspan="10">
+                  <div class="descripcion_de_tarea">{{ task.description }}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div>
+      <router-link :to="'/create-task?date=' + selected_date">
+        <xbutton class="boton_verde" style="width:100%;">Ir a crear tarea</xbutton>
+      </router-link>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {}.
+    método data donde {
+      retorno {
+        current_day_tasks: [],
+        selected_date: undefined,
+        selected_tasks: []
+      }.
+    }.
+    propiedad methods como {
+      método get_only_hour_and_minute con (hora) donde {
+        si hora no es tipo texto o hora.length es igual que 0 retorno "*".
+        retorno hora.substr(0,5).
+      } en errores hago Vue.prototype.$dialogs.error(error).
+      método toggle_task con (task_id) donde {
+        creo posicion como this.selected_tasks.indexOf(task_id).
+        si posicion es igual que 0-1 {
+          hago this.selected_tasks.push(task_id).
+        } y si no {
+          hago this.selected_tasks.splice(posicion, 1).
+        }.
+        hago this.$forceUpdate(true).
+      } en errores hago Vue.prototype.$dialogs.error(error).
+      método asíncrono delete_task con (task_id, task_name) donde {
+        creo confirmacion como asíncronamente Vue.prototype.$dialogs.confirm("¿Seguro que quieres eliminar la tarea «" + task_name + "»?").
+        si confirmacion es igual que false {
+          retorno.
+        }.
+        hago asíncronamente Vue.prototype.$db.delete("task", task_id).
+        hago asíncronamente this.refresh_tasks().
+        hago this.$forceUpdate(true).
+        hago Vue.prototype.$dialogs.inform("La tarea «" + task_name + "» fue eliminada correctamente.").
+      } en errores hago Vue.prototype.$dialogs.error(error).
+      método asíncrono refresh_tasks donde {
+        creo tasks como asíncronamente Vue.prototype.$db.select("task", una lambda con (task) donde retorno task.day es igual que this.selected_date).
+        creo sorted_tasks como tasks.sort(una lambda con (a, b) donde {
+          si a.day es menor que b.day retorno 0-1.
+          si b.day es menor que a.day retorno 1.
+          si a.hour es menor que b.hour retorno 0-1.
+          si b.hour es menor que a.hour retorno 1.
+          retorno 0.
+        }).
+        asigno this.current_day_tasks como sorted_tasks.
+      } en errores hago Vue.prototype.$dialogs.error(error).
+      método go_to_edit_task con (task_id) donde {
+        hago this.$router.history.push('/edit-task/' + task_id).
+      }.
+    }.
+    propiedad watch como {
+      método asíncrono selected_date con (nuevo_valor) donde {
+        hago asíncronamente this.refresh_tasks().
+      } en errores hago Vue.prototype.$dialogs.error(error).
+    }.
+    propiedad computed como {}.
+    método beforeCreate donde {}.
+    método created donde {}.
+    método beforeMount donde {}.
+    método mounted donde {
+      hago Vue.prototype.$TopBar.set_title("Calendario").
+    }.
+    método beforeUpdate donde {}.
+    método updated donde {}.
+    método beforeUnmount donde {}.
+    método unmounted donde {}.
+    método activated donde {}.
+    método deactivated donde {}.
+  }.
+}.

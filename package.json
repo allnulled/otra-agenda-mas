@@ -1,0 +1,16 @@
+{
+  "name": "mobile-web-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev-css": "nodemon -e scss -w docs/lib/components --ignore 'docs/lib/components/common/styles/all.css' -x 'npm run build-css'",
+    "build-ui": "cp docs/index.1.html docs/index.html",
+    "build-css": "npx sass docs/lib/components/common/styles/all.scss > docs/lib/components/common/styles/all.css",
+    "serve": "npx http-server -c-1 docs -o index.1.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "allnulled",
+  "license": "WTFPL"
+}

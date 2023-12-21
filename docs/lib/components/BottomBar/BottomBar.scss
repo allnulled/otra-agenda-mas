@@ -1,0 +1,30 @@
+.BottomBar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    min-height: $theme_fixed_bars_height;
+    background-color: $theme_color_1;
+    color: white;
+}
+.BottomBar > .bottom-bar-buttons {
+    
+}
+.BottomBar > .bottom-bar-buttons > .bottom-bar-button {
+    display: table-cell;
+    width: 33%;
+    height: $theme_fixed_bars_height;
+    border-left: 1px solid white;
+    text-align: center;
+    cursor: pointer;
+}
+.BottomBar > .bottom-bar-buttons > .bottom-bar-button:hover {
+    background-color: $theme_color_2;
+}
+.BottomBar > .bottom-bar-buttons > .bottom-bar-button > .bottom-bar-icon {
+    height: $theme_fixed_bars_height - 20px;
+    width: auto;
+    margin-top: 10px;
+    margin-left: 0px;
+}
