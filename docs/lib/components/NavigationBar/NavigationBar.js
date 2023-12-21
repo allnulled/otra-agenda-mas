@@ -7,7 +7,7 @@ window.NavigationBar = Castelog.metodos.un_componente_vue2("NavigationBar",
  + "    <div v-on:click=\"() => ir_a('/calendar')\">"
  + "      <xbutton class=\"navigation-button\">Calendario</xbutton>"
  + "    </div>"
- + "    <div v-on:click=\"() => ir_a('/taks')\">"
+ + "    <div v-on:click=\"() => ir_a('/tasks')\">"
  + "      <xbutton class=\"navigation-button\">Tareas</xbutton>"
  + "    </div>"
  + "  </div>",

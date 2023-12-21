@@ -1,21 +1,93 @@
 asigno window.PaginaDeTareas como un componente vue2 con nombre "PaginaDeTareas" con plantilla {
   <div class="PaginaDeTareas Component">
-    PaginaDeTareas
+    <xlayouthorizontal style="width:100%;">
+      <xlayouthorizontalitem style="width:50%">
+        <button class="boton_amarillo" style="width:100%;" v-on:click="select_past_tasks">Pasadas</button>
+      </xlayouthorizontalitem>
+      <xlayouthorizontalitem style="width:50%">
+        <button class="boton_amarillo" style="width:100%;" v-on:click="select_future_tasks">Futuras</button>
+      </xlayouthorizontalitem>
+    </xlayouthorizontal>
+    <table>
+      <tbody v-for="day_tasks, day_index in sorted_tasks" v-bind:key="'tareas-dia-' + day_index">
+        <tr>
+          <td colspan="100">{{ day_index }}</td>
+        </tr>
+        <tr v-for="task, task_index in day_tasks" v-bind:key="'tareas-dia-' + day_index + '-tarea-' + task_index">
+          <td class="tiempo_de_tarea">{{ task.hour ? task.hour : '*' }}</td>
+          <td class="nombre_de_tarea">{{ task.name }}</td>
+          <td class="celda_de_tarea">
+            <button class="boton_de_tarea boton_amarillo" style="padding: 4px; min-width:auto;" v-on:click="() => toggle_task(task.id)">
+              <img class="icono_de_boton" src="lib/icons/eye-black.png" />
+            </button>
+          </td>
+          <td class="celda_de_tarea">
+            <button class="boton_de_tarea boton_verde" style="padding: 4px; min-width:auto;" v-on:click="() => go_to_edit_task(task.id)">
+              <img class="icono_de_boton" src="lib/icons/pencil-black.png" />
+            </button>
+          </td>
+          <td class="celda_de_tarea">
+            <button class="boton_de_tarea boton_rojo" style="padding: 4px; min-width:auto;" v-on:click="() => delete_task(task.id, task.name)">
+              <img class="icono_de_boton" src="lib/icons/trash-black.png" />
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 } con lógica {
   retorno {
     propiedad props como {}.
     método data donde {
-      retorno {}.
+      retorno {
+        selected_tab: "futuras",
+        tasks: [],
+        sorted_tasks: []
+      }.
     }.
-    propiedad methods como {}.
-    propiedad watch como {}.
+    propiedad methods como {
+      método asíncrono toggle_task con (task_id) donde {
+
+      }.
+      método asíncrono go_to_edit_task con (task_id) donde {
+
+      }.
+      método asíncrono delete_task con (task_id) donde {
+
+      }.
+      método asíncrono select_past_tasks donde {
+        asigno this.selected_tab como "pasadas".
+        hago this.$forceUpdate(true).
+      } en errores hago Vue.prototype.$dialogs.error(error).
+      método asíncrono select_future_tasks donde {
+        asigno this.selected_tab como "futuras".
+        hago this.$forceUpdate(true).
+      } en errores hago Vue.prototype.$dialogs.error(error).
+      método asíncrono refresh_tasks donde {
+        creo tasks como asíncronamente Vue.prototype.$db.select("task").
+        asigno this.tasks como tasks.
+      } en errores hago Vue.prototype.$dialogs.error(error).
+    }.
+    propiedad watch como {
+      método tasks con (nuevo_valor) donde {
+        creo tasks_by_day como this.tasks.reduce(una lambda con (salida, task) donde {
+          si salida no contiene clave task.day {
+            asigno salida[task.day] como [].
+          }.
+          hago salida[task.day].push(task).
+          retorno salida.
+        }, {}).
+        asigno this.sorted_tasks como tasks_by_day.
+        hago this.$forceUpdate(true).
+      }.
+    }.
     propiedad computed como {}.
     método beforeCreate donde {}.
     método created donde {}.
     método beforeMount donde {}.
-    método mounted donde {
+    método asíncrono mounted donde {
       hago Vue.prototype.$TopBar.set_title("Tareas").
+      hago asíncronamente this.refresh_tasks().
     }.
     método beforeUpdate donde {}.
     método updated donde {}.
