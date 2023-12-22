@@ -5,25 +5,34 @@ asigno window.PaginaDeTareas como un componente vue2 con nombre "PaginaDeTareas"
         <tr>
           <td colspan="100" class="celda_de_dia_de_tarea">{{ day_index }}</td>
         </tr>
-        <tr v-for="task, task_index in day_tasks" v-bind:key="'tareas-dia-' + day_index + '-tarea-' + task_index">
-          <td class="tiempo_de_tarea">{{ get_only_hour_and_minute(task.hour) }}</td>
-          <td class="nombre_de_tarea">{{ task.name }}</td>
-          <td class="celda_de_tarea">
-            <button class="boton_de_tarea boton_amarillo" style="padding: 4px; min-width:auto;" v-on:click="() => toggle_task(task.id)">
-              <img class="icono_de_boton" src="lib/icons/eye-black.png" />
-            </button>
-          </td>
-          <td class="celda_de_tarea">
-            <button class="boton_de_tarea boton_verde" style="padding: 4px; min-width:auto;" v-on:click="() => go_to_edit_task(task.id)">
-              <img class="icono_de_boton" src="lib/icons/pencil-black.png" />
-            </button>
-          </td>
-          <td class="celda_de_tarea">
-            <button class="boton_de_tarea boton_rojo" style="padding: 4px; min-width:auto;" v-on:click="() => delete_task(task.id, task.name)">
-              <img class="icono_de_boton" src="lib/icons/trash-black.png" />
-            </button>
-          </td>
-        </tr>
+        <template v-for="task, task_index in day_tasks">
+          <tr v-bind:key="'tareas-dia-' + day_index + '-tarea-' + task_index">
+            <td class="tiempo_de_tarea">{{ get_only_hour_and_minute(task.hour) }}</td>
+            <td class="nombre_de_tarea">{{ task.name }}</td>
+            <td class="celda_de_tarea">
+              <button class="boton_de_tarea boton_amarillo" style="padding: 4px; min-width:auto;" v-on:click="() => toggle_task(task.id)">
+                <img class="icono_de_boton" src="lib/icons/eye-black.png" />
+              </button>
+            </td>
+            <td class="celda_de_tarea">
+              <button class="boton_de_tarea boton_verde" style="padding: 4px; min-width:auto;" v-on:click="() => go_to_edit_task(task.id)">
+                <img class="icono_de_boton" src="lib/icons/pencil-black.png" />
+              </button>
+            </td>
+            <td class="celda_de_tarea">
+              <button class="boton_de_tarea boton_rojo" style="padding: 4px; min-width:auto;" v-on:click="() => delete_task(task.id, task.name)">
+                <img class="icono_de_boton" src="lib/icons/trash-black.png" />
+              </button>
+            </td>
+          </tr>
+          <tr v-if="selected_tasks.indexOf(task.id) !== -1">
+            <td colspan="100">
+              <div class="descripcion_de_tarea">
+                {{ task.description }}
+              </div>
+            </td>
+          </tr>
+        </template>
       </tbody>
     </table>
   </div>
@@ -32,29 +41,44 @@ asigno window.PaginaDeTareas como un componente vue2 con nombre "PaginaDeTareas"
     propiedad props como {}.
     método data donde {
       retorno {
-        selected_tab: "futuras",
+        selected_days: [],
+        selected_tasks: [],
         tasks: [],
         sorted_tasks: []
       }.
     }.
     propiedad methods como {
+      
       método get_only_hour_and_minute con (hora) donde {
         si hora no es tipo texto o hora.length es igual que 0 retorno "*".
         retorno hora.substr(0,5).
       } en errores hago Vue.prototype.$dialogs.error(error).
+      
       método asíncrono toggle_task con (task_id) donde {
+        creo posicion como this.selected_tasks.indexOf(task_id).
+        si posicion es igual que 0-1 {
+          hago this.selected_tasks.push(task_id).
+        } y si no {
+          hago this.selected_tasks.splice(posicion, 1).
+        }.
+        hago this.$forceUpdate(true).
+      } en errores hago Vue.prototype.$dialogs.error(error).
 
-      }.
       método asíncrono go_to_edit_task con (task_id) donde {
-
-      }.
-      método asíncrono delete_task con (task_id) donde {
-
-      }.
+        hago this.$router.history.push("/edit-task/" + task_id).
+      } en errores hago Vue.prototype.$dialogs.error(error).
+      
+      método asíncrono delete_task con (task_id, task_name) donde {
+        creo confirmacion como asíncronamente Vue.prototype.$dialogs.confirm("¿Seguro que quieres eliminar la tarea «" + task_name + "»?").
+        si confirmacion no es igual que true retorno.
+        hago asíncronamente Vue.prototype.$db.delete("tasks", task_id).
+      } en errores hago Vue.prototype.$dialogs.error(error).
+      
       método asíncrono refresh_tasks donde {
         creo tasks como asíncronamente Vue.prototype.$db.select("task").
         asigno this.tasks como tasks.
       } en errores hago Vue.prototype.$dialogs.error(error).
+
     }.
     propiedad watch como {
       método tasks con (nuevo_valor) donde {

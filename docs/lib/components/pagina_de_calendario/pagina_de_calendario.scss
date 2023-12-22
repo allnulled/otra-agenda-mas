@@ -51,7 +51,8 @@
 }
 .nombre_de_tarea {
     width: 100%;
-    white-space: nowrap;
+    overflow: scroll;
+    word-break: break-all;
     background-color: $theme_color_1;
     padding: 12px;
     color: white;
@@ -60,6 +61,8 @@
 .descripcion_de_tarea {
     width: 100%;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
     background: #bebe69 !important;
     padding: 12px;
     color: black;

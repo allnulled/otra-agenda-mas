@@ -24,6 +24,7 @@ window.App = Castelog.metodos.una_aplicacion_vue2(
  + "      <NavigationBar />"
  + "      <div>"
  + "        <router-view :root=\"this\"></router-view>"
+ + "        <TopBarSpace />"
  + "      </div>"
  + "      <BottomBar />"
  + "      <xdialogport />"

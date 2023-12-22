@@ -76,6 +76,7 @@ creo main como una función asíncrona donde {
       <NavigationBar />
       <div>
         <router-view :root="this"></router-view>
+        <TopBarSpace />
       </div>
       <BottomBar />
       <xdialogport />
