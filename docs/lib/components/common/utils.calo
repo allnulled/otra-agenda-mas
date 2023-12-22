@@ -4,7 +4,7 @@ asigno window.$utils_global como {
     si task.state es igual que "Completado" {
       retorno { boton_verde: true }.
     } pero si task.state es igual que "Pendiente" {
-      retorno { boton_azul: true }.
+      retorno { boton_amarillo: true }.
     } pero si task.state es igual que "Fallido" {
       retorno { boton_rojo: true }.
     }.

@@ -44,7 +44,8 @@ throw new Error( "El nombre de la tarea no puede estar vacío." );
 { name:this.name,
 day:this.day,
 hour:this.hour,
-description:this.description
+description:this.description,
+state:"Pendiente"
 } ));
 (await Vue.prototype.$dialogs.inform( "La tarea fue insertada correctamente." ));
 this.$router.history.push( "/calendar" );

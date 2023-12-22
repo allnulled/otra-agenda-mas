@@ -39,7 +39,8 @@ asigno window.PaginaDeCrearTarea como un componente vue2 con nombre "PaginaDeCre
           name: this.name,
           day: this.day,
           hour: this.hour,
-          description: this.description
+          description: this.description,
+          state: "Pendiente"
         }).
         hago asíncronamente Vue.prototype.$dialogs.inform("La tarea fue insertada correctamente.").
         hago this.$router.history.push("/calendar").

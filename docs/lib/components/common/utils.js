@@ -5,7 +5,7 @@ return { boton_verde:true
 };
 }
 else if(task.state === "Pendiente") {
-return { boton_azul:true
+return { boton_amarillo:true
 };
 }
 else if(task.state === "Fallido") {
