@@ -192,6 +192,14 @@
   padding: 2px;
 }
 
+.celda_de_dia_de_tarea {
+  background-color: #222;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
 .CalendarioPrincipal .boton_de_dia_de_calendario {
   width: 20px;
   height: 20px;
@@ -263,9 +271,21 @@
   font-family: Arial;
   padding: 10px;
   text-shadow: 0 0 1px blue;
+  background-color: #222;
+  color: white;
+  padding: 10px;
 }
 
 .CalendarioPrincipal .entrada_de_calendario {
   text-align: center;
   width: 100%;
+}
+
+html {
+  background-image: linear-gradient(to right, #4b4bb0, #4b4bb0 1px, #e5e5f7 1px, #e5e5f7);
+  background-size: 2px 100%;
+}
+
+.win7 button {
+  box-shadow: 2px 2px 2px black;
 }

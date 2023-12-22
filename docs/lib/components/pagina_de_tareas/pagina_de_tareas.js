@@ -1,21 +1,13 @@
 
 window.PaginaDeTareas = Castelog.metodos.un_componente_vue2("PaginaDeTareas",
   "<div class=\"PaginaDeTareas Component\">"
- + "    <xlayouthorizontal style=\"width:100%;\">"
- + "      <xlayouthorizontalitem style=\"width:50%\">"
- + "        <button class=\"boton_amarillo\" style=\"width:100%;\" v-on:click=\"select_past_tasks\">Pasadas</button>"
- + "      </xlayouthorizontalitem>"
- + "      <xlayouthorizontalitem style=\"width:50%\">"
- + "        <button class=\"boton_amarillo\" style=\"width:100%;\" v-on:click=\"select_future_tasks\">Futuras</button>"
- + "      </xlayouthorizontalitem>"
- + "    </xlayouthorizontal>"
  + "    <table>"
  + "      <tbody v-for=\"day_tasks, day_index in sorted_tasks\" v-bind:key=\"'tareas-dia-' + day_index\">"
  + "        <tr>"
- + "          <td colspan=\"100\">{{ day_index }}</td>"
+ + "          <td colspan=\"100\" class=\"celda_de_dia_de_tarea\">{{ day_index }}</td>"
  + "        </tr>"
  + "        <tr v-for=\"task, task_index in day_tasks\" v-bind:key=\"'tareas-dia-' + day_index + '-tarea-' + task_index\">"
- + "          <td class=\"tiempo_de_tarea\">{{ task.hour ? task.hour : '*' }}</td>"
+ + "          <td class=\"tiempo_de_tarea\">{{ get_only_hour_and_minute(task.hour) }}</td>"
  + "          <td class=\"nombre_de_tarea\">{{ task.name }}</td>"
  + "          <td class=\"celda_de_tarea\">"
  + "            <button class=\"boton_de_tarea boton_amarillo\" style=\"padding: 4px; min-width:auto;\" v-on:click=\"() => toggle_task(task.id)\">"
@@ -49,23 +41,20 @@ throw error;
 }
 
 },
-methods:{ async toggle_task( task_id ) {
+methods:{ get_only_hour_and_minute( hora ) {try {
+if((!(typeof hora === 'string')) || hora.length === 0) {
+return "*";
+}
+return hora.substr( 0,
+5 );
+} catch(error) {
+Vue.prototype.$dialogs.error( error );}
+},
+async toggle_task( task_id ) {
 },
 async go_to_edit_task( task_id ) {
 },
 async delete_task( task_id ) {
-},
-async select_past_tasks() {try {
-this.selected_tab = "pasadas";
-this.$forceUpdate( true );
-} catch(error) {
-Vue.prototype.$dialogs.error( error );}
-},
-async select_future_tasks() {try {
-this.selected_tab = "futuras";
-this.$forceUpdate( true );
-} catch(error) {
-Vue.prototype.$dialogs.error( error );}
 },
 async refresh_tasks() {try {
 const tasks = (await Vue.prototype.$db.select( "task" ));

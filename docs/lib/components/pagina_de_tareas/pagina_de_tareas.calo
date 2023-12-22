@@ -1,20 +1,12 @@
 asigno window.PaginaDeTareas como un componente vue2 con nombre "PaginaDeTareas" con plantilla {
   <div class="PaginaDeTareas Component">
-    <xlayouthorizontal style="width:100%;">
-      <xlayouthorizontalitem style="width:50%">
-        <button class="boton_amarillo" style="width:100%;" v-on:click="select_past_tasks">Pasadas</button>
-      </xlayouthorizontalitem>
-      <xlayouthorizontalitem style="width:50%">
-        <button class="boton_amarillo" style="width:100%;" v-on:click="select_future_tasks">Futuras</button>
-      </xlayouthorizontalitem>
-    </xlayouthorizontal>
     <table>
       <tbody v-for="day_tasks, day_index in sorted_tasks" v-bind:key="'tareas-dia-' + day_index">
         <tr>
-          <td colspan="100">{{ day_index }}</td>
+          <td colspan="100" class="celda_de_dia_de_tarea">{{ day_index }}</td>
         </tr>
         <tr v-for="task, task_index in day_tasks" v-bind:key="'tareas-dia-' + day_index + '-tarea-' + task_index">
-          <td class="tiempo_de_tarea">{{ task.hour ? task.hour : '*' }}</td>
+          <td class="tiempo_de_tarea">{{ get_only_hour_and_minute(task.hour) }}</td>
           <td class="nombre_de_tarea">{{ task.name }}</td>
           <td class="celda_de_tarea">
             <button class="boton_de_tarea boton_amarillo" style="padding: 4px; min-width:auto;" v-on:click="() => toggle_task(task.id)">
@@ -46,6 +38,10 @@ asigno window.PaginaDeTareas como un componente vue2 con nombre "PaginaDeTareas"
       }.
     }.
     propiedad methods como {
+      método get_only_hour_and_minute con (hora) donde {
+        si hora no es tipo texto o hora.length es igual que 0 retorno "*".
+        retorno hora.substr(0,5).
+      } en errores hago Vue.prototype.$dialogs.error(error).
       método asíncrono toggle_task con (task_id) donde {
 
       }.
@@ -55,14 +51,6 @@ asigno window.PaginaDeTareas como un componente vue2 con nombre "PaginaDeTareas"
       método asíncrono delete_task con (task_id) donde {
 
       }.
-      método asíncrono select_past_tasks donde {
-        asigno this.selected_tab como "pasadas".
-        hago this.$forceUpdate(true).
-      } en errores hago Vue.prototype.$dialogs.error(error).
-      método asíncrono select_future_tasks donde {
-        asigno this.selected_tab como "futuras".
-        hago this.$forceUpdate(true).
-      } en errores hago Vue.prototype.$dialogs.error(error).
       método asíncrono refresh_tasks donde {
         creo tasks como asíncronamente Vue.prototype.$db.select("task").
         asigno this.tasks como tasks.
