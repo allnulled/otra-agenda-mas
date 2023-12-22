@@ -2,10 +2,21 @@
 window.PaginaDeEditarTarea = Castelog.metodos.un_componente_vue2("PaginaDeEditarTarea",
   "<div class=\"PaginaDeEditarTarea Component\">"
  + "    <div v-if=\"is_loaded\">"
- + "      <xformfield :initial-value=\"name\" :on-change=\"v => name = v\">Nombre de tarea:</xformfield>"
- + "      <xformdate style=\"width:100%;\" :initial-value=\"day\" :on-change=\"v => day = v\">Día de tarea:</xformdate>"
- + "      <xformtime style=\"width:100%;\" :initial-value=\"hour\" :on-change=\"v => hour = v\">Hora de tarea:</xformtime>"
- + "      <xformtextarea :initial-value=\"description\" :on-change=\"v => description = v\">Descripción de tarea:</xformtextarea>"
+ + "      <div class=\"item_de_formulario\">"
+ + "        <xformfield :initial-value=\"name\" :on-change=\"v => name = v\">Nombre de tarea:</xformfield>"
+ + "      </div>"
+ + "      <div class=\"item_de_formulario\">"
+ + "        <xformdate style=\"width:100%;\" :initial-value=\"day\" :on-change=\"v => day = v\">Día de tarea:</xformdate>"
+ + "      </div>"
+ + "      <div class=\"item_de_formulario\">"
+ + "        <xformtime style=\"width:100%;\" :initial-value=\"hour\" :on-change=\"v => hour = v\">Hora de tarea:</xformtime>"
+ + "      </div>"
+ + "      <div class=\"item_de_formulario\">"
+ + "        <xformtextarea :initial-value=\"description\" :on-change=\"v => description = v\">Descripción de tarea:</xformtextarea>"
+ + "      </div>"
+ + "      <div class=\"item_de_formulario\">"
+ + "        <xformcombobox :initial-value=\"state\" :on-change=\"v => state = v\" :options=\"['Pendiente', 'Completado', 'Fallido']\">Estado de la tarea:</xformcombobox>"
+ + "      </div>"
  + "      <hr />"
  + "      <button class=\"boton_verde\" style=\"width:100%;\" v-on:click=\"update_task\">Guardar</button>"
  + "    </div>"
@@ -20,7 +31,8 @@ return { is_loaded:false,
 name:"",
 day:"",
 hour:"",
-description:""
+description:"",
+state:""
 };
 } catch(error) {
 console.log(error);
@@ -38,7 +50,8 @@ id,
 { name:this.name,
 day:this.day,
 hour:this.hour,
-description:this.description
+description:this.description,
+state:this.state
 } ));
 (await Vue.prototype.$dialogs.inform( "La tarea fue actualizada correctamente." ));
 this.$router.history.push( "/calendar" );
@@ -75,10 +88,8 @@ if((!(tareas_coincidentes.length === 1))) {
 throw new Error( "No se encontraron tareas con el identificador proporcionado" );
 }
 const task = tareas_coincidentes[ 0 ];
-this.name = task.name;
-this.day = task.day;
-this.hour = task.hour;
-this.description = task.description;
+Object.assign( this,
+task );
 this.is_loaded = true;
 } catch(error) {
 Vue.prototype.$dialogs.error( error );}

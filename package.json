@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev-css": "nodemon -e scss -w docs/lib/components --ignore 'docs/lib/components/common/styles/all.css' -x 'npm run build-css'",
+    "build-xcomponents": "npx browserify docs/lib/xcomponents/components/api.js > docs/lib/xcomponents/xcomponents.js && node dev/build-css.js",
     "build-ui": "cp docs/index.1.html docs/index.html",
     "build-css": "npx sass docs/lib/components/common/styles/all.scss > docs/lib/components/common/styles/all.css",
     "serve": "npx http-server -c-1 docs -o index.1.html",
@@ -12,5 +13,8 @@
   },
   "keywords": [],
   "author": "allnulled",
-  "license": "WTFPL"
+  "license": "WTFPL",
+  "dependencies": {
+    "fs-extra": "^11.2.0"
+  }
 }

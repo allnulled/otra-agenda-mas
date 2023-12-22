@@ -123,8 +123,12 @@
     padding: 8px;
     padding-top: 12px;
 }
-.xformcombobox .combobox_input {
-    
+.xformcombobox .combobox_item {
+    margin-top: 8px;
+}
+
+.xformcombobox label {
+    cursor: pointer;
 }
 .xformdate {}
 .xformdate .form_group {

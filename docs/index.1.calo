@@ -35,7 +35,7 @@ creo main como una función asíncrona donde {
   creo load_database como una función asíncrona donde {
     ### hago asíncronamente RanasDB.dropDatabaseIfExists("Otra_agenda_mas_data").
     asigno Vue.prototype.$db como asíncronamente RanasDB.connect("Otra_agenda_mas_data", [[{
-      task: "++id,name,description,tags,date,time"
+      task: "++id,name,description,tags,date,time,state"
     }, una función]]).
   }.
   hago asíncronamente load_database().

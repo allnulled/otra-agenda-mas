@@ -1,14 +1,14 @@
 
 window.NavigationBar = Castelog.metodos.un_componente_vue2("NavigationBar",
-  "<div class=\"NavigationBar Component\">"
- + "    <div v-on:click=\"() => ir_a('/')\">"
- + "      <xbutton class=\"navigation-button\">Inicio</xbutton>"
+  "<div class=\"NavigationBar Component nombre_de_tarea\">"
+ + "    <div class=\"navigation_button_wrapper\" v-on:click=\"() => ir_a('/')\">"
+ + "      <xbutton class=\"navigation-button boton_amarillo\">Inicio</xbutton>"
  + "    </div>"
- + "    <div v-on:click=\"() => ir_a('/calendar')\">"
- + "      <xbutton class=\"navigation-button\">Calendario</xbutton>"
+ + "    <div class=\"navigation_button_wrapper\" v-on:click=\"() => ir_a('/calendar')\">"
+ + "      <xbutton class=\"navigation-button boton_amarillo\">Calendario</xbutton>"
  + "    </div>"
- + "    <div v-on:click=\"() => ir_a('/tasks')\">"
- + "      <xbutton class=\"navigation-button\">Tareas</xbutton>"
+ + "    <div class=\"navigation_button_wrapper\" v-on:click=\"() => ir_a('/tasks')\">"
+ + "      <xbutton class=\"navigation-button boton_amarillo\">Tareas</xbutton>"
  + "    </div>"
  + "  </div>",
   function(component) {return { props:{ 

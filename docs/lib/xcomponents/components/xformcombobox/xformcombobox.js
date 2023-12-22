@@ -7,7 +7,7 @@ xcomponents_components.xformcombobox = Castelog.metodos.un_componente_vue2("xfor
  + "      </div>"
  + "      <div>"
  + "        <div v-for=\"option, option_index in options\" v-bind:key=\"'xformcombobox-' + customId + '-option-' + option_index\">"
- + "          <div v-on:click=\"() => select_value(option)\">"
+ + "          <div class=\"combobox_item\" v-on:click=\"() => select_value(option)\">"
  + "            <input class=\"combobox_input\" type=\"radio\" :id=\"'xformcombobox-' + customId + '-option-' + option_index\" :checked=\"value === option\" />"
  + "            <label :for=\"'xformcombobox-' + customId + '-option-' + option_index\">{{ option }}</label>"
  + "          </div>"
