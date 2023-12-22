@@ -136,6 +136,36 @@
   background: #a04b4b !important;
 }
 
+.boton_azul {
+  background: #6969be !important;
+  color: white !important;
+  font-weight: bold !important;
+  font-family: Arial;
+  min-height: 40px;
+  height: 40px;
+  border-radius: 0pt !important;
+  border: none !important;
+}
+
+.boton_azul:hover {
+  background: #4b4ba0 !important;
+}
+
+.boton_lila {
+  background: #be69be !important;
+  color: white !important;
+  font-weight: bold !important;
+  font-family: Arial;
+  min-height: 40px;
+  height: 40px;
+  border-radius: 0pt !important;
+  border: none !important;
+}
+
+.boton_lila:hover {
+  background: #a04ba0 !important;
+}
+
 .boton_amarillo {
   background: #bebe69 !important;
   color: white !important;

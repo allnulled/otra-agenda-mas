@@ -1,0 +1,19 @@
+asigno window.$utils_global como {
+  
+  método get_eye_button_style con (task) donde {
+    si task.state es igual que "Completado" {
+      retorno { boton_verde: true }.
+    } pero si task.state es igual que "Pendiente" {
+      retorno { boton_azul: true }.
+    } pero si task.state es igual que "Fallido" {
+      retorno { boton_rojo: true }.
+    }.
+    retorno { boton_azul: true }.
+  }.
+
+  método get_only_hour_and_minute con (hora) donde {
+    si hora no es tipo texto o hora.length es igual que 0 retorno "*".
+    retorno hora.substr(0,5).
+  } en errores hago Vue.prototype.$dialogs.error(error).
+
+}.

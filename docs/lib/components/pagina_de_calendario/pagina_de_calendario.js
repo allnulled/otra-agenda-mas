@@ -13,11 +13,11 @@ window.PaginaDeCalendario = Castelog.metodos.un_componente_vue2("PaginaDeCalenda
  + "            <tbody v-for=\"task, task_index in current_day_tasks\" v-bind:key=\"'task-' + task_index\">"
  + "              <tr class=\"item_de_lista_de_tareas\">"
  + "                <td class=\"celda_de_tarea\" style=\"vertical-align: top;\">"
- + "                  <div class=\"tiempo_de_tarea\">{{ get_only_hour_and_minute(task.hour) }}</div>"
+ + "                  <div class=\"tiempo_de_tarea\">{{ $utils.get_only_hour_and_minute(task.hour) }}</div>"
  + "                </td>"
  + "                <td class=\"celda_de_tarea\" style=\"width: 100%;\">"
- + "                  <div class=\"nombre_de_tarea\">"
- + "                    <div>{{ task.name }}</div>"
+ + "                  <div class=\"nombre_de_tarea\" :class=\"$utils.get_eye_button_style(task)\">"
+ + "                    <div style=\"color: black;\">{{ task.name }}</div>"
  + "                  </div>"
  + "                </td>"
  + "                <td class=\"celda_de_tarea\" style=\"vertical-align: top;\">"
@@ -26,7 +26,7 @@ window.PaginaDeCalendario = Castelog.metodos.un_componente_vue2("PaginaDeCalenda
  + "                  </button>"
  + "                </td>"
  + "                <td class=\"celda_de_tarea\" style=\"vertical-align: top;\">"
- + "                  <button class=\"boton_de_tarea boton_verde\" style=\"padding: 4px; min-width:auto;\" v-on:click=\"() => go_to_edit_task(task.id)\">"
+ + "                  <button class=\"boton_de_tarea boton_azul\" style=\"padding: 4px; min-width:auto;\" v-on:click=\"() => go_to_edit_task(task.id)\">"
  + "                    <img class=\"icono_de_boton\" src=\"lib/icons/pencil-black.png\" />"
  + "                  </button>"
  + "                </td>"
@@ -48,7 +48,7 @@ window.PaginaDeCalendario = Castelog.metodos.un_componente_vue2("PaginaDeCalenda
  + "    </div>"
  + "    <div>"
  + "      <router-link :to=\"'/create-task?date=' + selected_date\">"
- + "        <xbutton class=\"boton_verde\" style=\"width:100%;\">Ir a crear tarea</xbutton>"
+ + "        <button class=\"boton_verde\" style=\"width:100%; color: black !important;\">Ir a crear tarea</button>"
  + "      </router-link>"
  + "    </div>"
  + "  </div>",
@@ -65,16 +65,7 @@ throw error;
 }
 
 },
-methods:{ get_only_hour_and_minute( hora ) {try {
-if((!(typeof hora === 'string')) || hora.length === 0) {
-return "*";
-}
-return hora.substr( 0,
-5 );
-} catch(error) {
-Vue.prototype.$dialogs.error( error );}
-},
-toggle_task( task_id ) {try {
+methods:{ toggle_task( task_id ) {try {
 const posicion = this.selected_tasks.indexOf( task_id );
 if(posicion === 0 - 1) {
 this.selected_tasks.push( task_id );

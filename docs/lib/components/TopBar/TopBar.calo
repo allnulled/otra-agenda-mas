@@ -1,13 +1,18 @@
 asigno window.TopBar como un componente vue2 con nombre "TopBar" con plantilla {
   <div class="TopBar Component">
     <xlayouthorizontal>
-      <xlayouthorizontalitem>
-        <div class="navigation-button" v-on:click="toggle_navigation">
-          <img class="navigation-icon" src="lib/icons/navigation-white.png" />
+      <xlayouthorizontalitem style=" vertical-align: middle; cursor:pointer;">
+        <div class="navigation-button" v-on:click="() => $router.back()">
+          <img class="navigation-icon" src="lib/icons/caret-left-white.png" />
         </div>
       </xlayouthorizontalitem>
       <xlayouthorizontalitem style="width:100%; vertical-align: middle; text-align: center;">
         {{ title }}
+      </xlayouthorizontalitem>
+      <xlayouthorizontalitem style="border-left: 1px solid white; vertical-align: middle; cursor:pointer;">
+        <div class="navigation-button" v-on:click="toggle_navigation">
+          <img class="navigation-icon" src="lib/icons/navigation-white.png" />
+        </div>
       </xlayouthorizontalitem>
     </xlayouthorizontal>
   </div>

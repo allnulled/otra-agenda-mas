@@ -8,7 +8,7 @@ window.PaginaDeTareas = Castelog.metodos.un_componente_vue2("PaginaDeTareas",
  + "        </tr>"
  + "        <template v-for=\"task, task_index in day_tasks\">"
  + "          <tr v-bind:key=\"'tareas-dia-' + day_index + '-tarea-' + task_index\">"
- + "            <td class=\"tiempo_de_tarea\">{{ get_only_hour_and_minute(task.hour) }}</td>"
+ + "            <td class=\"tiempo_de_tarea\" style=\"color:black !important;\" :class=\"$utils.get_eye_button_style(task)\">{{ $utils.get_only_hour_and_minute(task.hour) }}</td>"
  + "            <td class=\"nombre_de_tarea\">{{ task.name }}</td>"
  + "            <td class=\"celda_de_tarea\">"
  + "              <button class=\"boton_de_tarea boton_amarillo\" style=\"padding: 4px; min-width:auto;\" v-on:click=\"() => toggle_task(task.id)\">"
@@ -16,7 +16,7 @@ window.PaginaDeTareas = Castelog.metodos.un_componente_vue2("PaginaDeTareas",
  + "              </button>"
  + "            </td>"
  + "            <td class=\"celda_de_tarea\">"
- + "              <button class=\"boton_de_tarea boton_verde\" style=\"padding: 4px; min-width:auto;\" v-on:click=\"() => go_to_edit_task(task.id)\">"
+ + "              <button class=\"boton_de_tarea boton_azul\" style=\"padding: 4px; min-width:auto;\" v-on:click=\"() => go_to_edit_task(task.id)\">"
  + "                <img class=\"icono_de_boton\" src=\"lib/icons/pencil-black.png\" />"
  + "              </button>"
  + "            </td>"
@@ -51,16 +51,7 @@ throw error;
 }
 
 },
-methods:{ get_only_hour_and_minute( hora ) {try {
-if((!(typeof hora === 'string')) || hora.length === 0) {
-return "*";
-}
-return hora.substr( 0,
-5 );
-} catch(error) {
-Vue.prototype.$dialogs.error( error );}
-},
-async toggle_task( task_id ) {try {
+methods:{ async toggle_task( task_id ) {try {
 const posicion = this.selected_tasks.indexOf( task_id );
 if(posicion === 0 - 1) {
 this.selected_tasks.push( task_id );
@@ -112,6 +103,29 @@ throw error;
 },
 { 
 } );
+const dias = Object.keys(tasks_by_day);
+for(let index = 0; index < dias.length; index++) {const dia_texto = dias[ index ];
+const dia = tasks_by_day[ dia_texto ];
+dias[ index ] = dia.sort( ( a,
+b ) => {try {
+console.log(a);
+console.log(b);
+if(a.hour < b.hour) {
+return 0 - 1;
+}
+else if(a.hour > b.hour) {
+return 1;
+}
+else {
+return 0;
+}
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+} );
+tasks_by_day[ dia_texto ] = dias[ index ];}
 this.sorted_tasks = tasks_by_day;
 this.$forceUpdate( true );
 } catch(error) {

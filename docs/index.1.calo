@@ -12,6 +12,7 @@ Ejecutable como documento HTML5
     <link rel="stylesheet" type="text/css" href="lib/components/common/styles/all.css" />
     <script src="lib/calo/calo.js"></script>
     <script src="lib/xcomponents/xcomponents.js"></script>
+    <script src="lib/components/common/utils.js"></script>
     <script src="lib/components/TopBar/TopBar.js"></script>
     <script src="lib/components/TopBarSpace/TopBarSpace.js"></script>
     <script src="lib/components/BottomBar/BottomBar.js"></script>
@@ -38,7 +39,11 @@ creo main como una función asíncrona donde {
       task: "++id,name,description,tags,date,time,state"
     }, una función]]).
   }.
+  creo load_utils como una función asíncrona donde {
+    asigno Vue.prototype.$utils como window.$utils_global.
+  }.
   hago asíncronamente load_database().
+  hago asíncronamente load_utils().
   asigno window.App como una aplicación vue2 con nombre "App" con rutas [{
     propiedad path como "/tasks".
     propiedad name como "PaginaDeTareas".
