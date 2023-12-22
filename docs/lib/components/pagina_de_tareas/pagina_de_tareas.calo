@@ -66,7 +66,7 @@ asigno window.PaginaDeTareas como un componente vue2 con nombre "PaginaDeTareas"
       método asíncrono delete_task con (task_id, task_name) donde {
         creo confirmacion como asíncronamente Vue.prototype.$dialogs.confirm("¿Seguro que quieres eliminar la tarea «" + task_name + "»?").
         si confirmacion no es igual que true retorno.
-        hago asíncronamente Vue.prototype.$db.delete("tasks", task_id).
+        hago asíncronamente Vue.prototype.$db.delete("task", task_id).
       } en errores hago Vue.prototype.$dialogs.error(error).
       
       método asíncrono refresh_tasks donde {

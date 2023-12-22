@@ -75,7 +75,7 @@ const confirmacion = (await Vue.prototype.$dialogs.confirm( "¿Seguro que quiere
 if((!(confirmacion === true))) {
 return;
 }
-(await Vue.prototype.$db.delete( "tasks",
+(await Vue.prototype.$db.delete( "task",
 task_id ));
 } catch(error) {
 Vue.prototype.$dialogs.error( error );}
