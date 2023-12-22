@@ -23,7 +23,7 @@ window.CalendarioPrincipal = Castelog.metodos.un_componente_vue2("CalendarioPrin
  + "            <tr v-for=\"semana, semana_index in celdas_del_mes_actual\" v-bind:key=\"'semana-' + semana_index\">"
  + "              <td v-for=\"dia, dia_index in semana\" v-bind:key=\"'dia-' + dia_index\">"
  + "                <span v-if=\"dia\">"
- + "                  <button class=\"boton_de_calendario boton_de_dia_de_calendario\" :class=\"{active: dia.getDate() === fecha_seleccionada.getDate()}\" v-on:click=\"() => seleccionar_dia(dia)\">{{ dia.getDate() }}</button>"
+ + "                  <button class=\"boton_de_calendario boton_de_dia_de_calendario\" :class=\"{current: dia.getDate() === fecha_actual.getDate(),active: dia.getDate() === fecha_seleccionada.getDate()}\" v-on:click=\"() => seleccionar_dia(dia)\">{{ dia.getDate() }}</button>"
  + "                </span>"
  + "              </td>"
  + "            </tr>"
@@ -126,7 +126,8 @@ default:function() {
 }
 },
 data() {try {
-return { fecha_seleccionada:undefined,
+return { fecha_actual:new Date(  ),
+fecha_seleccionada:undefined,
 celdas_del_mes_actual:undefined,
 hora_seleccionada:"0",
 minuto_seleccionado:"0",

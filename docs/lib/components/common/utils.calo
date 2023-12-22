@@ -16,4 +16,22 @@ asigno window.$utils_global como {
     retorno hora.substr(0,5).
   } en errores hago Vue.prototype.$dialogs.error(error).
 
+  método pad_left con (entrada, longitud o en su defecto 2, relleno o en su defecto "0") donde {
+    creo variable salida como entrada + "".
+    mientras salida.length es menor que longitud {
+      asigno salida como relleno + salida.
+    }.
+    retorno salida.
+  }.
+
+  método get_day_by_date con (date) donde {
+    creo variable day como "".
+    incremento day en this.pad_left(date.getFullYear(), 4, "0").
+    incremento day en "-".
+    incremento day en this.pad_left(date.getMonth() + 1, 2, "0").
+    incremento day en "-".
+    incremento day en this.pad_left(date.getDate() + 1, 4, "0").
+    retorno day.
+  }.
+
 }.

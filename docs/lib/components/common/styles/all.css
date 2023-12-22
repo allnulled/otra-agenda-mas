@@ -106,6 +106,31 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.tabla_de_tareas_del_dia td {
+  vertical-align: middle;
+}
+
+.tabla_de_tareas_del_dia .tarea {
+  background-color: #4b4bb0;
+  padding: 12px;
+  font-weight: bold;
+  color: white;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.tabla_de_tareas_del_dia .color_rojo {
+  background-color: #be6969 !important;
+}
+
+.tabla_de_tareas_del_dia .color_verde {
+  background-color: #69be69 !important;
+}
+
+.tabla_de_tareas_del_dia .color_amarillo {
+  background-color: #bebe69 !important;
+}
+
 .boton_verde {
   background: #69be69 !important;
   color: white !important;
@@ -271,6 +296,12 @@
 .CalendarioPrincipal .boton_de_dia_de_calendario.active {
   outline-style: none;
   background: #4B4BA0 !important;
+}
+
+.CalendarioPrincipal .boton_de_dia_de_calendario.current {
+  outline-style: none;
+  background: #FFFFFF !important;
+  color: #000000 !important;
 }
 
 .CalendarioPrincipal .tabla_de_calendario {

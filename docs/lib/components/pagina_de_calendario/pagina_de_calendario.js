@@ -56,6 +56,7 @@ window.PaginaDeCalendario = Castelog.metodos.un_componente_vue2("PaginaDeCalenda
 },
 data() {try {
 return { current_day_tasks:[  ],
+current_date:this.$utils.get_day_by_date( new Date(  ) ),
 selected_date:undefined,
 selected_tasks:[  ]
 };

@@ -28,5 +28,39 @@ return hora.substr( 0,
 5 );
 } catch(error) {
 Vue.prototype.$dialogs.error( error );}
+},
+pad_left( entrada,
+longitud = 2,
+relleno = "0" ) {try {
+let salida = entrada + "";
+while(salida.length < longitud) {
+salida = relleno + salida;
+}
+return salida;
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+},
+get_day_by_date( date ) {try {
+let day = "";
+day += this.pad_left( date.getFullYear(  ),
+4,
+"0" );
+day += "-";
+day += this.pad_left( date.getMonth(  ) + 1,
+2,
+"0" );
+day += "-";
+day += this.pad_left( date.getDate(  ) + 1,
+4,
+"0" );
+return day;
+} catch(error) {
+console.log(error);
+throw error;
+}
+
 }
 };

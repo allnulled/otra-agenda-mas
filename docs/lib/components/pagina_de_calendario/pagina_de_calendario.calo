@@ -57,6 +57,7 @@ asigno window.PaginaDeCalendario como un componente vue2 con nombre "PaginaDeCal
     método data donde {
       retorno {
         current_day_tasks: [],
+        current_date: this.$utils.get_day_by_date(un nuevo Date()),
         selected_date: undefined,
         selected_tasks: []
       }.

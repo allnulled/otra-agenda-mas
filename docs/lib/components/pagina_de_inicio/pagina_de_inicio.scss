@@ -1,0 +1,23 @@
+.tabla_de_tareas_del_dia {
+
+}
+.tabla_de_tareas_del_dia td {
+    vertical-align: middle;
+}
+.tabla_de_tareas_del_dia .tarea {
+    background-color: #4b4bb0;
+    padding: 12px;
+    font-weight: bold;
+    color: white;
+    text-align: left;
+    white-space: nowrap;
+}
+.tabla_de_tareas_del_dia .color_rojo {
+    background-color: #be6969 !important;
+}
+.tabla_de_tareas_del_dia .color_verde {
+    background-color: #69be69 !important;
+}
+.tabla_de_tareas_del_dia .color_amarillo {
+    background-color: #bebe69 !important;
+}

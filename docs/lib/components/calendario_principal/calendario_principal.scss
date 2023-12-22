@@ -25,6 +25,11 @@
     outline-style: none;
     background: #4B4BA0 !important;
 }
+.CalendarioPrincipal .boton_de_dia_de_calendario.current {
+    outline-style: none;
+    background: #FFFFFF !important;
+    color: #000000 !important;
+}
 .CalendarioPrincipal .tabla_de_calendario {
     width: 100%;
 }

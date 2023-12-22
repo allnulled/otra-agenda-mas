@@ -22,7 +22,7 @@ asigno window.CalendarioPrincipal como un componente vue2 con nombre "Calendario
             <tr v-for="semana, semana_index in celdas_del_mes_actual" v-bind:key="'semana-' + semana_index">
               <td v-for="dia, dia_index in semana" v-bind:key="'dia-' + dia_index">
                 <span v-if="dia">
-                  <button class="boton_de_calendario boton_de_dia_de_calendario" :class="{active: dia.getDate() === fecha_seleccionada.getDate()}" v-on:click="() => seleccionar_dia(dia)">{{ dia.getDate() }}</button>
+                  <button class="boton_de_calendario boton_de_dia_de_calendario" :class="{current: dia.getDate() === fecha_actual.getDate(),active: dia.getDate() === fecha_seleccionada.getDate()}" v-on:click="() => seleccionar_dia(dia)">{{ dia.getDate() }}</button>
                 </span>
               </td>
             </tr>
@@ -117,6 +117,7 @@ asigno window.CalendarioPrincipal como un componente vue2 con nombre "Calendario
     }.
     método data donde {
       retorno {
+        fecha_actual: un nuevo Date(),
         fecha_seleccionada: undefined,
         celdas_del_mes_actual: undefined,
         hora_seleccionada: "0",
