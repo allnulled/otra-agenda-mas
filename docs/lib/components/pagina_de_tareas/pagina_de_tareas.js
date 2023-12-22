@@ -77,12 +77,14 @@ return;
 }
 (await Vue.prototype.$db.delete( "task",
 task_id ));
+this.refresh_tasks(  );
 } catch(error) {
 Vue.prototype.$dialogs.error( error );}
 },
 async refresh_tasks() {try {
 const tasks = (await Vue.prototype.$db.select( "task" ));
 this.tasks = tasks;
+this.$forceUpdate( true );
 } catch(error) {
 Vue.prototype.$dialogs.error( error );}
 }
