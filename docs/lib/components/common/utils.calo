@@ -30,7 +30,7 @@ asigno window.$utils_global como {
     incremento day en "-".
     incremento day en this.pad_left(date.getMonth() + 1, 2, "0").
     incremento day en "-".
-    incremento day en this.pad_left(date.getDate() + 1, 4, "0").
+    incremento day en this.pad_left(date.getDate(), 2, "0").
     retorno day.
   }.
 

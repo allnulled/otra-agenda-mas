@@ -4,7 +4,15 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
       <table class="tabla_de_tareas_del_dia" style="width: 100%;">
         <tr>
           <td>
-            <div class="tarea color_amarillo">{{ pendientes_del_dia }}</div>
+            <div class="tarea color_azul">{{ total_del_dia }}</div>
+          </td>
+          <td style="width: 100%;">
+            <div class="tarea">Tareas del día totales</div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="tarea color_amarillo" style="color: black;">{{ pendientes_del_dia }}</div>
           </td>
           <td style="width: 100%;">
             <div class="tarea">Tareas del día pendientes</div>
@@ -12,7 +20,7 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
         </tr>
         <tr>
           <td>
-            <div class="tarea color_verde">{{ completados_del_dia }}</div>
+            <div class="tarea color_verde" style="color: black;">{{ completados_del_dia }}</div>
           </td>
           <td>
             <div class="tarea">Tareas del día completadas</div>
@@ -20,7 +28,7 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
         </tr>
         <tr>
           <td>
-            <div class="tarea color_rojo">{{ fallidos_del_dia }}</div>
+            <div class="tarea color_rojo" style="color: black;">{{ fallidos_del_dia }}</div>
           </td>
           <td>
             <div class="tarea">Tareas del día fallidas</div>
@@ -35,6 +43,7 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
     método data donde {
       retorno {
         esta_cargando: true,
+        total_del_dia: 0,
         pendientes_del_dia: 0,
         completados_del_dia: 0,
         fallidos_del_dia: 0
@@ -43,32 +52,40 @@ asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio"
     propiedad methods como {
       método asíncrono refresh_data donde {
         asigno this.esta_cargando como true.
-        creo tasks como asíncronamente Vue.prototype.$db.select("task").
-        creo variable pendientes como 0.
-        creo variable completados como 0.
-        creo variable fallidos como 0.
-        creo dia_actual como this.$utils.get_day_by_date(un nuevo Date()).
-        desde 0 hasta tasks.length {
-          creo task como tasks[index].
-          imprimo task.
-
-          si task.day es igual que dia_actual {}.
-          si task.state es igual que "Pendiente" {
-            incremento pendientes.
+        en proceso sobre_el_dia {
+          creo tasks como asíncronamente Vue.prototype.$db.select("task").
+          creo variable total como 0.
+          creo variable pendientes como 0.
+          creo variable completados como 0.
+          creo variable fallidos como 0.
+          creo dia_actual como this.$utils.get_day_by_date(un nuevo Date()).
+          imprimo "task.dat must be: " + dia_actual.
+          en proceso iterar_tareas donde desde 0 hasta tasks.length {
+            creo task como tasks[index].
+            imprimo task.day.
+            si task.day no es igual que dia_actual {
+              continúo proceso iterar_tareas.
+            }.
+            si task.state es igual que "Pendiente" {
+              incremento pendientes.
+            }.
+            si task.state es igual que "Completado" {
+              incremento completados.
+            }.
+            si task.state es igual que "Fallido" {
+              incremento fallidos.
+            }.
+            incremento total.
           }.
-          si task.state es igual que "Completado" {
-            incremento completados.
-          }.
-          si task.state es igual que "Fallido" {
-            incremento fallidos.
-          }.
+          imprimo total.
+          imprimo pendientes.
+          imprimo completados.
+          imprimo fallidos.
+          asigno this.total_del_dia como total.
+          asigno this.pendientes_del_dia como pendientes.
+          asigno this.completados_del_dia como completados.
+          asigno this.fallidos_del_dia como fallidos.
         }.
-        imprimo pendientes.
-        imprimo completados.
-        imprimo fallidos.
-        asigno this.pendientes_del_dia como pendientes.
-        asigno this.completados_del_dia como completados.
-        asigno this.fallidos_del_dia como fallidos.
         asigno this.esta_cargando como false.
         hago this.$forceUpdate(true).
       }.

@@ -53,8 +53,8 @@ day += this.pad_left( date.getMonth(  ) + 1,
 2,
 "0" );
 day += "-";
-day += this.pad_left( date.getDate(  ) + 1,
-4,
+day += this.pad_left( date.getDate(  ),
+2,
 "0" );
 return day;
 } catch(error) {
